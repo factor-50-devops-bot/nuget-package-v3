@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>HelpMyStreet</Company>
+    <Product>HelpMyStreet</Product>
+    <Authors>HelpMyStreet</Authors>
+    <Description>Shared contracts for the HelpMyStreet Project.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelpMyStreet.Utils\HelpMyStreet.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ReportService\Request\" />
+  </ItemGroup>
+
+</Project>
