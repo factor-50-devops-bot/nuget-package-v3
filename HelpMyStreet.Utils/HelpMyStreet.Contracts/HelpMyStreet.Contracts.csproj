@@ -7,6 +7,7 @@
     <Product>HelpMyStreet</Product>
     <Authors>HelpMyStreet</Authors>
     <Description>Shared contracts for the HelpMyStreet Project.</Description>
+    <PackageId>HelpMyStreet.v3.Contracts</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

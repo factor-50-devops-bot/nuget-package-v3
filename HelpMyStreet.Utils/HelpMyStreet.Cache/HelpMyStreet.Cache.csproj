@@ -8,6 +8,7 @@
     <Product>HelpMyStreet</Product>
     <Authors>HelpMyStreet</Authors>
     <Description>Cache for the HelpMyStreet Project.</Description>
+    <PackageId>HelpMyStreet.v3.Cache</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
