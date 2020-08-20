@@ -1,0 +1,46 @@
+variables:
+  major: 1
+  minor: 1
+  patch: $[counter(format('patch.{0}.{1}', variables['major'], variables['minor']),0)]
+  nugetVersion: $(major).$(minor).$(patch)
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: DotNetCore build
+  inputs:
+    command: 'build'
+    projects: 'HelpMyStreet.Utils/**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: DotNetCore test
+  inputs:
+    command: 'test'
+    projects: 'HelpMyStreet.Utils/**/*.csproj'
+
+- task: NuGetToolInstaller@1
+  displayName: NuGet install
+  inputs:
+    checkLatest: true
+    
+- task: DotNetCoreCLI@2
+  displayName: NuGet pack
+  inputs:
+    command: 'pack'
+    includesymbols: true
+    packagesToPack: 'HelpMyStreet.Utils/**/*.csproj;!HelpMyStreet.Utils/**/*Tests.csproj'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'nugetVersion'
+    
+- task: NuGetCommand@2
+  displayName: NuGet push
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'e5c08e0c-1c28-42ca-815f-5ca90021fd46/9ff815b0-abc7-442a-98cb-d2879666c3bb'
