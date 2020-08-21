@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using HelpMyStreet.Utils.Enums;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace HelpMyStreet.Utils.Utils
 {
@@ -27,7 +27,7 @@ namespace HelpMyStreet.Utils.Utils
         {
             HttpClient httpClient = _httpClientFactory.CreateClient(httpClientConfigName.ToString());
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, absolutePath);
-            request.Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8);
+            request.Content = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8);
 
             return httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         }
